@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ideation 2, EIP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#111014; --fg:#f2eee4; --muted:#9a948a; --card:#1a1820; --line:rgba(242,238,228,.12);
+    --accent-a:#caa23e; --accent-b:#c4f000;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    background:var(--bg); color:var(--fg); font-family:'Inter', system-ui, sans-serif;
+    min-height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:clamp(24px,6vw,64px) max(20px, env(safe-area-inset-left, 0px));
+    padding-right:max(20px, env(safe-area-inset-right, 0px));
+    gap:clamp(28px,5vw,48px);
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); text-align:center;
+  }
+  h1{
+    font-family:'Space Grotesk', system-ui, sans-serif; font-weight:700; font-size:clamp(2rem,6vw,3.4rem);
+    text-align:center; line-height:1.05; text-wrap:balance;
+  }
+  .sub{color:var(--muted); text-align:center; max-width:46ch; font-size:clamp(.95rem,2vw,1.1rem); line-height:1.5;}
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:20px; width:100%; max-width:820px;}
+  @media (max-width:680px){ .grid{grid-template-columns:1fr;} }
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:10px; padding:clamp(22px,4vw,32px);
+    display:flex; flex-direction:column; gap:10px; text-decoration:none; color:inherit;
+    transition:transform .2s ease, border-color .2s ease;
+  }
+  .card:hover{transform:translateY(-3px); border-color:var(--accent);}
+  .card.dossier{--accent:var(--accent-a);}
+  .card.bilan{--accent:var(--accent-b);}
+  .card .label{
+    font-family:'JetBrains Mono', monospace; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--accent);
+  }
+  .card h2{font-family:'Space Grotesk', system-ui, sans-serif; font-size:clamp(1.4rem,3vw,1.8rem); font-weight:700;}
+  .card p{color:var(--muted); font-size:.92rem; line-height:1.5;}
+  .card .go{
+    margin-top:auto; font-family:'JetBrains Mono', monospace; font-size:.75rem; color:var(--accent);
+    display:flex; align-items:center; gap:6px;
+  }
+  footer{font-family:'JetBrains Mono', monospace; font-size:.68rem; color:var(--muted); text-align:center;}
+</style>
+</head>
+<body>
+
+<div class="eyebrow">EIP, Ideation 2</div>
+<h1>Deux idées, un seul rendu</h1>
+<p class="sub">Chaque présentation suit le même schéma en quatre temps : projet et nom, problème et audience, solution, conclusion.</p>
+
+<div class="grid">
+  <a class="card dossier" href="dossier.html">
+    <span class="label">Track Solution</span>
+    <h2>DOSSIER</h2>
+    <p>Assistant IA pour les démarches administratives à Cotonou, Bénin.</p>
+    <span class="go">Ouvrir la présentation &rarr;</span>
+  </a>
+  <a class="card bilan" href="bilan-sms.html">
+    <span class="label">Track Solution</span>
+    <h2>BILAN SMS</h2>
+    <p>Comptabilité automatique à partir des SMS Mobile Money, Cotonou, Bénin.</p>
+    <span class="go">Ouvrir la présentation &rarr;</span>
+  </a>
+</div>
+
+<footer>KERNEL, Hub Innovation Epitech Bénin</footer>
+
+</body>
+</html>

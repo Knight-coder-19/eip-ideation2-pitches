@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DOSSIER</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-dark:#131019;
+    --bg-light:#f4eee0;
+    --fg-dark:#f4eee0;
+    --fg-light:#1d1811;
+    --accent:#caa23e;
+    --accent-deep:#8a6d1f;
+    --muted-dark:#aa9f88;
+    --muted-light:#6e6554;
+    --card-dark:#1d1a24;
+    --card-light:#ffffff;
+    --line-dark:rgba(244,238,224,0.14);
+    --line-light:rgba(29,24,17,0.12);
+    --serif:'Fraunces', Georgia, serif;
+    --sans:'Inter', system-ui, sans-serif;
+    --mono:'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%; overflow:hidden; background:var(--bg-dark);}
+  body{font-family:var(--sans); -webkit-font-smoothing:antialiased;}
+  ::selection{background:var(--accent); color:#1d1811;}
+
+  .deck{position:relative; width:100vw; height:100svh; overflow:hidden;}
+  .track{display:flex; height:100%; width:400%; transition:transform .65s cubic-bezier(.65,0,.35,1);}
+  .slide{
+    width:25%; height:100%; flex:0 0 25%;
+    display:flex; flex-direction:column; justify-content:center;
+    padding: clamp(28px,6vw,96px) clamp(20px,7vw,120px);
+    position:relative; overflow:hidden;
+  }
+  .slide.dark{background:var(--bg-dark); color:var(--fg-dark);}
+  .slide.light{background:var(--bg-light); color:var(--fg-light);}
+
+  .eyebrow{
+    font-family:var(--mono); font-size:0.78rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent); display:flex; align-items:center; gap:.5em; margin-bottom:clamp(20px,4vh,48px);
+  }
+  .eyebrow::before{content:'◆'; font-size:.6em;}
+
+  h1{font-family:var(--serif); font-weight:700; line-height:.92; letter-spacing:-.01em;}
+  .headline{font-size:clamp(2.6rem,7vw,6.2rem); margin-bottom:.3em; text-wrap:balance;}
+  .tagline{font-family:var(--serif); font-style:italic; font-weight:500; font-size:clamp(1.1rem,2.2vw,1.6rem); color:var(--accent); margin-bottom:.6em; text-wrap:balance;}
+  .sub{font-size:clamp(.95rem,1.6vw,1.15rem); color:var(--muted-dark); max-width:46ch; line-height:1.5;}
+  .light .sub{color:var(--muted-light);}
+
+  .underline{display:inline-block; width:2.6em; height:.16em; background:var(--accent); margin-top:.35em;}
+
+  /* HERO */
+  .hero-bg{position:absolute; inset:0; z-index:0;}
+  .hero-bg img{width:100%; height:100%; object-fit:cover; opacity:.34; filter:grayscale(.5) contrast(1.05);}
+  .hero-bg::after{content:''; position:absolute; inset:0; background:
+    linear-gradient(100deg, var(--bg-dark) 28%, rgba(19,16,25,.78) 55%, rgba(19,16,25,.35) 100%);}
+  .slide-1 .content{position:relative; z-index:1;}
+  .meta-row{position:absolute; bottom:clamp(24px,5vh,56px); left:clamp(20px,7vw,120px); right:clamp(20px,7vw,120px);
+    display:flex; justify-content:space-between; font-family:var(--mono); font-size:.72rem; letter-spacing:.08em;
+    color:var(--muted-dark); text-transform:uppercase; z-index:1;}
+
+  /* SLIDE 2 : PROBLEM */
+  .problem-grid{display:grid; grid-template-columns:1fr 1.15fr; gap:clamp(24px,4vw,64px); align-items:start;}
+  .audience-card{background:var(--card-light); border:1px solid var(--line-light); border-radius:4px; padding:clamp(20px,3vw,32px);}
+  .audience-card .label{font-family:var(--mono); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-deep); margin-bottom:10px;}
+  .audience-card p{font-size:clamp(.95rem,1.5vw,1.05rem); line-height:1.6;}
+  .existing-note{margin-top:14px; padding-top:14px; border-top:1px dashed var(--line-light);}
+  .existing-label{font-family:var(--mono); font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted-light); display:block; margin-bottom:5px;}
+  .existing-note p{font-size:.85rem; color:var(--muted-light); line-height:1.5;}
+  .existing-note em{color:var(--accent-deep); font-style:normal; font-weight:600;}
+  .audience-photo{margin-top:16px; border-radius:3px; overflow:hidden; aspect-ratio:16/10; position:relative;}
+  .credit{position:absolute; bottom:8px; right:8px; z-index:2; font-family:var(--mono); font-size:.6rem; color:#fff;
+    background:rgba(0,0,0,.5); padding:2px 7px; border-radius:3px; letter-spacing:.03em; pointer-events:none;}
+  .audience-photo img{width:100%; height:100%; object-fit:cover; filter:sepia(.25) contrast(1.05);}
+  .pain-list{display:flex; flex-direction:column; gap:14px;}
+  .pain{display:flex; gap:16px; align-items:flex-start; border-bottom:1px solid var(--line-light); padding-bottom:14px;}
+  .pain:last-child{border-bottom:none;}
+  .pain .num{font-family:var(--mono); font-size:.95rem; color:var(--accent-deep); padding-top:2px;}
+  .pain h3{font-family:var(--serif); font-size:clamp(1.05rem,1.8vw,1.3rem); margin-bottom:4px;}
+  .pain p{font-size:.95rem; color:var(--muted-light); line-height:1.5;}
+
+  /* SLIDE 3 : SOLUTION */
+  .sol-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(32px,5vw,72px); align-items:center;}
+  .steps{display:flex; flex-direction:column; gap:22px; margin-top:28px;}
+  .step{display:flex; gap:16px; align-items:flex-start;}
+  .step .dot{width:30px; height:30px; flex:none; border-radius:50%; border:1px solid var(--accent); color:var(--accent);
+    display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:.8rem;}
+  .step h4{font-size:1.05rem; font-weight:600; margin-bottom:2px;}
+  .step p{color:var(--muted-dark); font-size:.9rem; line-height:1.4;}
+  .callout{margin-top:30px; border-left:3px solid var(--accent); padding-left:16px; font-size:.92rem; color:var(--muted-dark); max-width:50ch; line-height:1.55;}
+  .callout strong{color:var(--fg-dark);}
+
+  .phone-wrap{display:flex; justify-content:center;}
+  .phone{width:min(240px, 60vw); aspect-ratio:9/19; background:#0a0810; border-radius:2.2rem; padding:9px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.6), 0 0 0 1px rgba(244,238,224,.06); position:relative;}
+  .phone::before{content:''; position:absolute; top:14px; left:50%; transform:translateX(-50%); width:38%; height:14px;
+    background:#0a0810; border-radius:0 0 14px 14px; z-index:2;}
+  .phone__screen{background:#faf6ea; height:100%; border-radius:1.5rem; overflow:hidden; display:flex; flex-direction:column;
+    padding:18px 10px 8px; gap:6px;}
+  .statusbar{display:flex; justify-content:space-between; align-items:center; padding:0 4px 6px; color:#1d1811; flex:none;}
+  .statusbar .time{font-family:var(--mono); font-size:.62rem; font-weight:600;}
+  .statusbar .icons{display:flex; gap:5px; align-items:center;}
+  .chat{flex:1; display:flex; flex-direction:column; gap:7px; overflow:hidden; min-height:0;}
+  .bubble,.msg{font-family:var(--sans); font-size:.68rem; line-height:1.4; padding:8px 11px; border-radius:12px; max-width:86%;
+    opacity:0; transform:translateY(8px); transition:opacity .4s ease, transform .4s ease;}
+  .bubble.show,.msg.show{opacity:1; transform:none;}
+  .bubble.bot,.msg.bot{background:#e9e1cc; color:#2a2318; align-self:flex-start; border-bottom-left-radius:3px;}
+  .bubble.user,.msg.user{background:var(--accent-deep); color:#fff; align-self:flex-end; border-bottom-right-radius:3px;}
+  .bubble strong,.msg strong{display:block; margin-top:4px; color:var(--accent);}
+  .bubble.bot strong,.msg.bot strong{color:var(--accent-deep);}
+  .typing{display:flex; gap:4px; align-items:center; padding:9px 12px; background:#e9e1cc; border-radius:12px; width:fit-content;
+    opacity:0; transform:translateY(8px); transition:opacity .3s, transform .3s; align-self:flex-start; color:#2a2318;}
+  .typing.show{opacity:1; transform:none;}
+  .typing span{width:5px; height:5px; border-radius:50%; background:currentColor; opacity:.4; animation:blink 1.2s infinite;}
+  .typing span:nth-child(2){animation-delay:.2s;}
+  .typing span:nth-child(3){animation-delay:.4s;}
+  @keyframes blink{0%,80%,100%{opacity:.25; transform:translateY(0);} 40%{opacity:1; transform:translateY(-2px);}}
+  .cta{opacity:0; pointer-events:none; transform:translateY(6px); transition:opacity .3s, transform .3s; align-self:flex-start;
+    background:var(--accent-deep); color:#fff; border:none; border-radius:10px; padding:7px 13px; font-family:var(--sans);
+    font-size:.64rem; font-weight:600; cursor:pointer; margin-top:2px;}
+  .cta.show{opacity:1; pointer-events:auto; transform:none;}
+  .cta:hover{filter:brightness(1.1);}
+  .checklist{max-height:0; opacity:0; overflow:hidden; transition:max-height .45s ease, opacity .3s ease;
+    display:flex; flex-direction:column; gap:5px;}
+  .checklist.show{max-height:160px; opacity:1; margin-top:2px;}
+  .check-item{font-family:var(--mono); font-size:.6rem; color:#2a2318; background:#e9e1cc; border-radius:7px; padding:5px 8px;}
+  .check-item.ready{background:var(--accent); color:#1d1811; font-weight:700;}
+  .replay{flex:none; align-self:center; background:none; border:1px solid rgba(29,24,17,.22); color:#6e6554;
+    font-family:var(--mono); font-size:.58rem; border-radius:20px; padding:4px 11px; cursor:pointer; transition:background .2s; margin-top:4px;}
+  .replay:hover{background:rgba(29,24,17,.08);}
+  .home-indicator{flex:none; width:34%; height:4px; border-radius:3px; background:rgba(29,24,17,.3); margin:6px auto 0;}
+
+  /* SLIDE 4 : CONCLUSION */
+  .slide-4{align-items:center; text-align:center;}
+  .slide-4 .headline{font-size:clamp(2.1rem,5.4vw,4.4rem); max-width:16ch; margin:0 auto .3em;}
+  .slide-4 .sub{max-width:52ch; margin:0 auto 1.4em; color:var(--muted-light);}
+  .ask{background:var(--card-light); border:1px solid var(--line-light); border-radius:4px; padding:18px 26px;
+    display:inline-block; font-size:.92rem; max-width:58ch; margin:0 auto 1.6em; text-align:left; line-height:1.5;}
+  .ask .label{font-family:var(--mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-deep); display:block; margin-bottom:6px;}
+  .close-tag{font-family:var(--serif); font-style:italic; font-size:clamp(1rem,2vw,1.25rem); color:var(--accent-deep);}
+
+  /* NAV */
+  .nav{position:fixed; bottom:clamp(14px,4vh,32px); left:0; right:0; z-index:10; display:flex; align-items:center;
+    justify-content:center; gap:18px; pointer-events:none;}
+  .nav *{pointer-events:auto;}
+  .nav-btn{width:42px; height:42px; border-radius:50%; border:1px solid var(--line-dark); background:rgba(19,16,25,.55);
+    backdrop-filter:blur(6px); color:#f4eee0; font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    transition:background .2s, transform .2s;}
+  .nav-btn:hover{background:var(--accent); color:#1d1811; transform:scale(1.06);}
+  .dots{display:flex; gap:9px;}
+  .dot-btn{width:8px; height:8px; border-radius:50%; background:var(--line-dark); border:none; cursor:pointer; transition:background .2s, transform .2s;}
+  .dot-btn.active{background:var(--accent); transform:scale(1.3);}
+  .counter{position:fixed; top:clamp(14px,4vh,32px); right:clamp(20px,6vw,56px); z-index:10; font-family:var(--mono);
+    font-size:.75rem; letter-spacing:.08em; color:var(--muted-dark); mix-blend-mode:difference;}
+
+  @media (max-width:780px){
+    .problem-grid, .sol-grid{grid-template-columns:1fr;}
+    .phone-wrap{margin-top:20px;}
+    .phone{width:190px;}
+    .deck{overflow-y:auto;}
+    .slide{padding-top:64px; padding-bottom:110px; min-height:100%; height:auto; justify-content:flex-start; overflow-y:auto;}
+    .track{height:auto; align-items:stretch;}
+  }
+</style>
+</head>
+<body>
+
+<div class="deck">
+  <div class="track" id="track">
+
+    <section class="slide dark slide-1">
+      <div class="hero-bg"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Cotonou.jpg" alt="Cotonou de nuit"><span class="credit">Photo : Samdusal · CC BY-SA 4.0</span></div>
+      <div class="content">
+        <div class="eyebrow">EIP · Ideation 2 · Track Solution</div>
+        <h1 class="headline">DOSSIER<span class="underline" style="display:block; margin-top:.15em;"></span></h1>
+        <p class="tagline">Le bon papier, trouvé avant que vous le cherchiez.</p>
+        <p class="sub">Assistant IA pour les démarches administratives, Cotonou, Bénin.</p>
+      </div>
+      <div class="meta-row"><span>Projet &amp; nom</span><span>01 / 04</span></div>
+    </section>
+
+    <section class="slide light slide-2">
+      <div class="eyebrow" style="color:var(--accent-deep);">Le problème &amp; l'audience</div>
+      <h1 class="headline" style="font-size:clamp(2rem,4.6vw,3.6rem); margin-bottom:.5em;">Le bon papier, jamais au bon moment</h1>
+      <div class="problem-grid">
+        <div>
+          <div class="audience-card">
+            <div class="label">Audience</div>
+            <p>Un citoyen béninois qui doit obtenir une pièce précise (casier judiciaire, attestation, acte de naissance, légalisation), sans savoir au départ laquelle de ses démarches est déjà en ligne.</p>
+            <div class="existing-note">
+              <span class="existing-label">Ce qui existe déjà</span>
+              <p>Le casier judiciaire est <em>100 % en ligne depuis mars 2026</em> sur service-public.bj. Mais chaque démarche reste un service séparé, à trouver soi-même, avec son NPI en main.</p>
+            </div>
+          </div>
+          <div class="audience-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/6/61/3%C3%A8me_Arrondissement_de_Cotonou_%28Si%C3%A8ge_d%27Agbodj%C3%A8do%29.jpg" alt="Siège administratif, Cotonou"><span class="credit">Photo : Saliousoft · CC BY-SA 4.0</span></div>
+        </div>
+        <div class="pain-list">
+          <div class="pain">
+            <span class="num">01</span>
+            <div><h3>Mauvaise pièce</h3><p>On découvre l'erreur une fois dans la file, pas avant.</p></div>
+          </div>
+          <div class="pain">
+            <span class="num">02</span>
+            <div><h3>Procédure invisible</h3><p>Chaque administration a ses règles, écrites nulle part de façon claire.</p></div>
+          </div>
+          <div class="pain">
+            <span class="num">03</span>
+            <div><h3>Journée perdue</h3><p>Il faut revenir demain, et parfois poser un jour de congé pour ça.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide dark slide-3">
+      <div class="eyebrow">La solution</div>
+      <div class="sol-grid">
+        <div>
+          <h1 class="headline" style="font-size:clamp(2rem,4.4vw,3.4rem);">Décrivez votre besoin, on sort le dossier</h1>
+          <div class="steps">
+            <div class="step"><span class="dot">1</span><div><h4>Décrire</h4><p>En langage naturel : « je dois fournir un casier judiciaire pour un visa ».</p></div></div>
+            <div class="step"><span class="dot">2</span><div><h4>Liste exacte</h4><p>L'IA identifie les pièces requises, où les obtenir, et pré-remplit les formulaires.</p></div></div>
+            <div class="step"><span class="dot">3</span><div><h4>Suivi</h4><p>Statut du dossier jusqu'au retrait de la pièce finale.</p></div></div>
+          </div>
+          <p class="callout"><strong>Sans IA :</strong> il faut déjà savoir quel service chercher sur service-public.bj, et avoir son NPI en main.<br><strong>Avec DOSSIER :</strong> vous décrivez votre besoin, l'IA route vers le bon service, ou vous dit s'il faut encore passer par un guichet.</p>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="phone__screen">
+              <div class="statusbar">
+                <span class="time">09:41</span>
+                <span class="icons">
+                  <svg width="16" height="10" viewBox="0 0 16 10" fill="currentColor"><rect x="0" y="6" width="3" height="4" rx="0.5"/><rect x="4.3" y="4" width="3" height="6" rx="0.5"/><rect x="8.6" y="2" width="3" height="8" rx="0.5"/><rect x="12.9" y="0" width="3" height="10" rx="0.5"/></svg>
+                  <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M1 3.5a9 9 0 0 1 12 0"/><path d="M3.3 6a5.5 5.5 0 0 1 7.4 0"/><circle cx="7" cy="8.6" r="1" fill="currentColor" stroke="none"/></svg>
+                  <svg width="20" height="11" viewBox="0 0 22 11" fill="none"><rect x="0.5" y="0.5" width="18" height="10" rx="2.5" stroke="currentColor"/><rect x="2" y="2" width="15" height="7" rx="1.2" fill="currentColor"/><rect x="19.5" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+                </span>
+              </div>
+              <div class="chat" id="dossierChat">
+                <div class="typing" id="d-typing1"><span></span><span></span><span></span></div>
+                <div class="msg bot" id="d-msg1">Bonjour ! Dites-moi ce que vous devez faire.</div>
+                <div class="msg user" id="d-msg2">Je dois fournir un casier judiciaire pour un visa.</div>
+                <div class="typing" id="d-typing2"><span></span><span></span><span></span></div>
+                <div class="msg bot" id="d-msg3">Bonne nouvelle : c'est en ligne sur service-public.bj.<br>Il vous faut :<br>1. Votre NPI<br>2. Une pièce d'identité valide<br>3. 1 900 FCFA à régler en ligne</div>
+                <button class="cta" id="d-cta">Oui, guidez-moi →</button>
+                <div class="checklist" id="d-checklist">
+                  <div class="check-item">✓ NPI vérifié</div>
+                  <div class="check-item">✓ Pièce d'identité valide</div>
+                  <div class="check-item">✓ 1 900 FCFA réglés en ligne</div>
+                  <div class="check-item ready">Demande envoyée sur service-public.bj</div>
+                </div>
+              </div>
+              <button class="replay" id="d-replay">↻ Rejouer</button>
+              <div class="home-indicator"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide light slide-4">
+      <div class="eyebrow" style="color:var(--accent-deep); justify-content:center;">Conclusion</div>
+      <h1 class="headline">Devenir le guichet numérique de référence</h1>
+      <p class="sub">D'abord pour les démarches individuelles à Cotonou, puis pour toute administration numérique là où le papier domine encore.</p>
+      <p class="close-tag">DOSSIER : le bon papier, trouvé avant que vous le cherchiez.</p>
+    </section>
+
+  </div>
+</div>
+
+<div class="counter" id="counter">01 / 04</div>
+<div class="nav">
+  <button class="nav-btn" id="prev" aria-label="Précédent">‹</button>
+  <div class="dots" id="dots"></div>
+  <button class="nav-btn" id="next" aria-label="Suivant">›</button>
+</div>
+
+<script>
+(function(){
+  var dossierTimeouts = [];
+  function resetDossierDemo(){
+    dossierTimeouts.forEach(clearTimeout); dossierTimeouts = [];
+    ['d-typing1','d-typing2','d-msg1','d-msg2','d-msg3','d-cta','d-checklist'].forEach(function(id){
+      document.getElementById(id).classList.remove('show');
+    });
+  }
+  function playDossierDemo(){
+    function at(ms, fn){ dossierTimeouts.push(setTimeout(fn, ms)); }
+    at(300, function(){ document.getElementById('d-typing1').classList.add('show'); });
+    at(1100, function(){ document.getElementById('d-typing1').classList.remove('show'); document.getElementById('d-msg1').classList.add('show'); });
+    at(1900, function(){ document.getElementById('d-msg2').classList.add('show'); });
+    at(2700, function(){ document.getElementById('d-typing2').classList.add('show'); });
+    at(3700, function(){ document.getElementById('d-typing2').classList.remove('show'); document.getElementById('d-msg3').classList.add('show'); });
+    at(4400, function(){ document.getElementById('d-cta').classList.add('show'); });
+  }
+  document.getElementById('d-cta').addEventListener('click', function(){
+    this.classList.remove('show');
+    document.getElementById('d-checklist').classList.add('show');
+  });
+  document.getElementById('d-replay').addEventListener('click', function(){
+    resetDossierDemo();
+    setTimeout(playDossierDemo, 80);
+  });
+
+  var track = document.getElementById('track');
+  var slides = document.querySelectorAll('.slide');
+  var total = slides.length;
+  var dotsEl = document.getElementById('dots');
+  var counterEl = document.getElementById('counter');
+  var idx = 0;
+  var lastIdx = -1;
+
+  for(var i=0;i<total;i++){
+    var b = document.createElement('button');
+    b.className = 'dot-btn' + (i===0 ? ' active' : '');
+    b.addEventListener('click', (function(n){ return function(){ go(n); }; })(i));
+    dotsEl.appendChild(b);
+  }
+
+  function render(){
+    track.style.transform = 'translateX(-' + (idx * (100/total)) + '%)';
+    var dots = dotsEl.querySelectorAll('.dot-btn');
+    dots.forEach(function(d,i){ d.classList.toggle('active', i===idx); });
+    counterEl.textContent = String(idx+1).padStart(2,'0') + ' / ' + String(total).padStart(2,'0');
+    if(idx===2 && lastIdx!==2){ resetDossierDemo(); setTimeout(playDossierDemo, 150); }
+    if(idx!==2 && lastIdx===2){ resetDossierDemo(); }
+    lastIdx = idx;
+  }
+  function go(n){ idx = Math.max(0, Math.min(total-1, n)); render(); }
+
+  document.getElementById('prev').addEventListener('click', function(){ go(idx-1); });
+  document.getElementById('next').addEventListener('click', function(){ go(idx+1); });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key==='ArrowRight' || e.key===' ') go(idx+1);
+    if(e.key==='ArrowLeft') go(idx-1);
+  });
+
+  var touchX = null;
+  document.addEventListener('touchstart', function(e){ touchX = e.touches[0].clientX; }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    if(touchX===null) return;
+    var dx = e.changedTouches[0].clientX - touchX;
+    if(Math.abs(dx) > 40){ dx < 0 ? go(idx+1) : go(idx-1); }
+    touchX = null;
+  }, {passive:true});
+
+  render();
+})();
+</script>
+
+</body>
+</html>
