@@ -139,6 +139,12 @@
   .counter{position:fixed; top:clamp(14px,4vh,32px); right:clamp(20px,6vw,56px); z-index:10; font-family:var(--mono);
     font-size:.75rem; letter-spacing:.08em; color:var(--muted); mix-blend-mode:difference;}
 
+  .lang-toggle{position:fixed; top:clamp(14px,4vh,32px); left:clamp(20px,6vw,56px); z-index:10; display:flex; gap:2px;
+    background:rgba(11,22,18,.65); backdrop-filter:blur(6px); border:1px solid var(--line); border-radius:20px; padding:3px;}
+  .lang-btn{font-family:var(--mono); font-size:.68rem; letter-spacing:.05em; padding:4px 11px; border-radius:16px; border:none;
+    background:transparent; color:var(--muted); cursor:pointer; transition:background .2s, color .2s;}
+  .lang-btn.active{background:var(--accent); color:#0b1612;}
+
   @media (max-width:780px){
     .problem-grid, .sol-grid{grid-template-columns:1fr;}
     .phone-wrap{margin-top:20px;}
@@ -157,25 +163,25 @@
     <section class="slide slide-1">
       <div class="hero-bg"><img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Having_fun_at_the_market.jpg" alt="Marché à Cotonou"><span class="credit">Photo : PGskot · CC BY-SA 4.0</span></div>
       <div class="content">
-        <div class="eyebrow">EIP · Ideation 2 · Track Solution</div>
+        <div class="eyebrow" id="b-eyebrow1">EIP · Ideation 2 · Track Solution</div>
         <h1 class="headline">BILAN SMS<span class="underline" style="display:block; margin-top:.1em;"></span></h1>
-        <p class="tagline">Votre comptable, caché dans vos SMS Mobile Money.</p>
-        <p class="sub">Comptabilité automatique à partir des SMS MTN MoMo, Moov Money &amp; Celtiis, Cotonou, Bénin.</p>
+        <p class="tagline" id="b-tagline">Votre comptable, caché dans vos SMS Mobile Money.</p>
+        <p class="sub" id="b-sub1">Comptabilité automatique à partir des SMS MTN MoMo, Moov Money &amp; Celtiis, Cotonou, Bénin.</p>
       </div>
-      <div class="meta-row"><span>Projet &amp; nom</span><span>01 / 04</span></div>
+      <div class="meta-row"><span id="b-meta-label">Projet &amp; nom</span><span>01 / 04</span></div>
     </section>
 
     <section class="slide alt slide-2">
-      <div class="eyebrow">Le problème &amp; l'audience</div>
-      <h1 class="headline" style="font-size:clamp(2rem,4.6vw,3.6rem); margin-bottom:.5em;">Le bénéfice existe. Personne ne le voit.</h1>
+      <div class="eyebrow" id="b-eyebrow2">Le problème &amp; l'audience</div>
+      <h1 class="headline" id="b-h2" style="font-size:clamp(2rem,4.6vw,3.6rem); margin-bottom:.5em;">Le bénéfice existe. Personne ne le voit.</h1>
       <div class="problem-grid">
         <div>
           <div class="audience-card">
             <div class="label">Audience</div>
-            <p>Un commerçant ou micro-entrepreneur qui vit du Mobile Money (boutique, atelier, revente) et jongle chaque jour avec plusieurs portefeuilles à la fois.</p>
+            <p id="b-aud-p">Un commerçant ou micro-entrepreneur qui vit du Mobile Money (boutique, atelier, revente) et jongle chaque jour avec plusieurs portefeuilles à la fois.</p>
             <div class="existing-note">
-              <span class="existing-label">Ce qui existe déjà</span>
-              <p><strong>Proboutik</strong> (Sénégal) importe déjà les flux Wave et Orange Money par API. Rien de comparable ne couvre les 3 opérateurs béninois par lecture directe des SMS, sans compte marchand ni connexion requise.</p>
+              <span class="existing-label" id="b-exist-label">Ce qui existe déjà</span>
+              <p id="b-exist-p"><strong>Proboutik</strong> (Sénégal) importe déjà les flux Wave et Orange Money par API. Rien de comparable ne couvre les 3 opérateurs béninois par lecture directe des SMS, sans compte marchand ni connexion requise.</p>
             </div>
           </div>
           <div class="audience-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Benin_-_Market_photo_11.jpg" alt="Scène de marché au Bénin"><span class="credit">Photo : Abby Wendle · CC BY-SA 4.0</span></div>
@@ -183,31 +189,31 @@
         <div class="pain-list">
           <div class="pain">
             <span class="num">01</span>
-            <div><h3>Des dizaines de SMS par jour</h3><p>MTN, Moov et Celtiis envoient chacun leurs notifications, dans leur propre format.</p></div>
+            <div id="b-pain1"><h3>Des dizaines de SMS par jour</h3><p>MTN, Moov et Celtiis envoient chacun leurs notifications, dans leur propre format.</p></div>
           </div>
           <div class="pain">
             <span class="num">02</span>
-            <div><h3>Aucun cahier de comptes</h3><p>Personne ne reporte ces montants nulle part : trop long, trop fastidieux.</p></div>
+            <div id="b-pain2"><h3>Aucun cahier de comptes</h3><p>Personne ne reporte ces montants nulle part : trop long, trop fastidieux.</p></div>
           </div>
           <div class="pain">
             <span class="num">03</span>
-            <div><h3>Frais et retraits invisibles</h3><p>Le bénéfice réel se perd entre commissions, frais et retraits non comptés.</p></div>
+            <div id="b-pain3"><h3>Frais et retraits invisibles</h3><p>Le bénéfice réel se perd entre commissions, frais et retraits non comptés.</p></div>
           </div>
         </div>
       </div>
     </section>
 
     <section class="slide slide-3">
-      <div class="eyebrow">La solution</div>
+      <div class="eyebrow" id="b-eyebrow3">La solution</div>
       <div class="sol-grid">
         <div>
-          <h1 class="headline" style="font-size:clamp(2rem,4.4vw,3.4rem);">Lisez un bilan, pas une pile de SMS</h1>
+          <h1 class="headline" id="b-h3" style="font-size:clamp(2rem,4.4vw,3.4rem);">Lisez un bilan, pas une pile de SMS</h1>
           <div class="steps">
-            <div class="step"><span class="dot">1</span><div><h4>Lire</h4><p>Les SMS de transaction, avec permission, sur les 3 opérateurs.</p></div></div>
-            <div class="step"><span class="dot">2</span><div><h4>Classer</h4><p>Vente, achat, frais, retrait : reconnu automatiquement.</p></div></div>
-            <div class="step"><span class="dot">3</span><div><h4>Bilan</h4><p>Bénéfice du jour, de la semaine, du mois.</p></div></div>
+            <div class="step"><span class="dot">1</span><div id="b-step1"><h4>Lire</h4><p>Les SMS de transaction, avec permission, sur les 3 opérateurs.</p></div></div>
+            <div class="step"><span class="dot">2</span><div id="b-step2"><h4>Classer</h4><p>Vente, achat, frais, retrait : reconnu automatiquement.</p></div></div>
+            <div class="step"><span class="dot">3</span><div id="b-step3"><h4>Bilan</h4><p>Bénéfice du jour, de la semaine, du mois.</p></div></div>
           </div>
-          <p class="callout"><strong>Sans IA :</strong> trois formats de SMS différents, qui changent sans préavis à chaque mise à jour des opérateurs.<br><strong>Avec BILAN SMS :</strong> la même classification, quel que soit l'opérateur qui vous écrit.</p>
+          <p class="callout" id="b-callout"><strong>Sans IA :</strong> trois formats de SMS différents, qui changent sans préavis à chaque mise à jour des opérateurs.<br><strong>Avec BILAN SMS :</strong> la même classification, quel que soit l'opérateur qui vous écrit.</p>
         </div>
         <div class="phone-wrap">
           <div class="phone">
@@ -223,12 +229,13 @@
               <div class="sms-area" id="bilanArea">
                 <div class="sms seq" id="b-sms1">MTN MoMo : <b>+5 000 FCFA</b> reçus de Chantal A.</div>
                 <div class="sms seq" id="b-sms2">Moov Money : retrait <b>10 000 FCFA</b>, frais 150 FCFA.</div>
+                <!-- b-sms1/2 and ledger labels translated via i18n dict below -->
                 <div class="arrow-down seq" id="b-arrow">↓</div>
                 <div class="ledger">
-                  <div class="ledger-row seq" id="b-row1"><span>Ventes</span><span class="val" id="b-val1" data-target="128400" data-neg="0">0 FCFA</span></div>
-                  <div class="ledger-row neg seq" id="b-row2"><span>Achats</span><span class="val" id="b-val2" data-target="64200" data-neg="1">0 FCFA</span></div>
-                  <div class="ledger-row neg seq" id="b-row3"><span>Frais</span><span class="val" id="b-val3" data-target="3100" data-neg="1">0 FCFA</span></div>
-                  <div class="ledger-row total seq" id="b-row4"><span>Bénéfice (semaine)</span><span class="val" id="b-val4" data-target="61100" data-neg="0">0 FCFA</span></div>
+                  <div class="ledger-row seq" id="b-row1"><span id="b-label1">Ventes</span><span class="val" id="b-val1" data-target="128400" data-neg="0">0 FCFA</span></div>
+                  <div class="ledger-row neg seq" id="b-row2"><span id="b-label2">Achats</span><span class="val" id="b-val2" data-target="64200" data-neg="1">0 FCFA</span></div>
+                  <div class="ledger-row neg seq" id="b-row3"><span id="b-label3">Frais</span><span class="val" id="b-val3" data-target="3100" data-neg="1">0 FCFA</span></div>
+                  <div class="ledger-row total seq" id="b-row4"><span id="b-label4">Bénéfice (semaine)</span><span class="val" id="b-val4" data-target="61100" data-neg="0">0 FCFA</span></div>
                 </div>
               </div>
               <button class="replay" id="b-replay">↻ Rejouer</button>
@@ -241,15 +248,19 @@
 
     <section class="slide alt slide-4">
       <div class="eyebrow" style="justify-content:center;">Conclusion</div>
-      <h1 class="headline">La comptabilité invisible du commerce informel</h1>
-      <p class="sub">D'abord à Cotonou, puis comme porte d'entrée vers le crédit pour ceux qui n'ont pas de garanties classiques.</p>
-      <p class="close-tag">BILAN SMS : votre comptable, caché dans vos SMS.</p>
+      <h1 class="headline" id="b-h4">La comptabilité invisible du commerce informel</h1>
+      <p class="sub" id="b-sub4">D'abord à Cotonou, puis comme porte d'entrée vers le crédit pour ceux qui n'ont pas de garanties classiques.</p>
+      <p class="close-tag" id="b-close">BILAN SMS : votre comptable, caché dans vos SMS.</p>
     </section>
 
   </div>
 </div>
 
 <div class="counter" id="counter">01 / 04</div>
+<div class="lang-toggle">
+  <button class="lang-btn active" id="lang-fr">FR</button>
+  <button class="lang-btn" id="lang-en">EN</button>
+</div>
 <div class="nav">
   <button class="nav-btn" id="prev" aria-label="Précédent">‹</button>
   <div class="dots" id="dots"></div>
@@ -300,6 +311,55 @@
     resetBilanDemo();
     setTimeout(playBilanDemo, 80);
   });
+
+  var i18n = {
+    'b-eyebrow1': { en: 'EIP · Ideation 2 · Solution Track' },
+    'b-tagline': { en: 'Your accountant, hidden inside your Mobile Money texts.' },
+    'b-sub1': { en: 'Automatic bookkeeping from MTN MoMo, Moov Money &amp; Celtiis texts, Cotonou, Benin.' },
+    'b-meta-label': { en: 'Project &amp; name' },
+    'b-eyebrow2': { en: 'The problem &amp; the audience' },
+    'b-h2': { en: 'The profit exists. Nobody sees it.' },
+    'b-aud-p': { en: 'A shopkeeper or micro-entrepreneur who lives off Mobile Money (shop, workshop, resale) and juggles several wallets at once, every day.' },
+    'b-exist-label': { en: 'What already exists' },
+    'b-exist-p': { en: '<strong>Proboutik</strong> (Senegal) already imports Wave and Orange Money flows through an API. Nothing comparable covers Benin\'s 3 operators by reading text messages directly, with no merchant account or connection required.' },
+    'b-pain1': { en: '<h3>Dozens of texts a day</h3><p>MTN, Moov and Celtiis each send their own notifications, in their own format.</p>' },
+    'b-pain2': { en: '<h3>No ledger at all</h3><p>Nobody writes these amounts down anywhere: too long, too tedious.</p>' },
+    'b-pain3': { en: '<h3>Invisible fees and withdrawals</h3><p>The real profit gets lost between commissions, fees, and withdrawals nobody counts.</p>' },
+    'b-eyebrow3': { en: 'The solution' },
+    'b-h3': { en: 'Read a statement, not a pile of texts' },
+    'b-step1': { en: '<h4>Read</h4><p>Transaction texts, with permission, across all 3 operators.</p>' },
+    'b-step2': { en: '<h4>Classify</h4><p>Sale, purchase, fee, withdrawal: recognized automatically.</p>' },
+    'b-step3': { en: '<h4>Statement</h4><p>Profit for the day, the week, the month.</p>' },
+    'b-callout': { en: '<strong>Without AI:</strong> three different text formats, changing without notice at every operator update.<br><strong>With BILAN SMS:</strong> the same classification, no matter which operator is texting you.' },
+    'b-sms1': { en: 'MTN MoMo: <b>+5,000 FCFA</b> received from Chantal A.' },
+    'b-sms2': { en: 'Moov Money: withdrawal of <b>10,000 FCFA</b>, fee 150 FCFA.' },
+    'b-label1': { en: 'Sales' },
+    'b-label2': { en: 'Purchases' },
+    'b-label3': { en: 'Fees' },
+    'b-label4': { en: 'Profit (week)' },
+    'b-replay': { en: '↻ Replay' },
+    'b-h4': { en: 'The invisible bookkeeping of informal commerce' },
+    'b-sub4': { en: 'First in Cotonou, then as a gateway to credit for those without traditional collateral.' },
+    'b-close': { en: 'BILAN SMS: your accountant, hidden inside your texts.' }
+  };
+  Object.keys(i18n).forEach(function(id){ i18n[id].fr = document.getElementById(id).innerHTML; });
+
+  function setLang(lang){
+    Object.keys(i18n).forEach(function(id){ document.getElementById(id).innerHTML = i18n[id][lang]; });
+    document.documentElement.lang = lang;
+    document.getElementById('lang-fr').classList.toggle('active', lang === 'fr');
+    document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+    document.getElementById('prev').setAttribute('aria-label', lang === 'fr' ? 'Précédent' : 'Previous');
+    document.getElementById('next').setAttribute('aria-label', lang === 'fr' ? 'Suivant' : 'Next');
+    try{ localStorage.setItem('bilan-lang', lang); }catch(e){}
+  }
+  document.getElementById('lang-fr').addEventListener('click', function(){ setLang('fr'); });
+  document.getElementById('lang-en').addEventListener('click', function(){ setLang('en'); });
+  (function(){
+    var saved = null;
+    try{ saved = localStorage.getItem('bilan-lang'); }catch(e){}
+    if(saved === 'en') setLang('en');
+  })();
 
   var track = document.getElementById('track');
   var slides = document.querySelectorAll('.slide');

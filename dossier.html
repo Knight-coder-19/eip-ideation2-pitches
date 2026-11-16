@@ -159,6 +159,12 @@
   .counter{position:fixed; top:clamp(14px,4vh,32px); right:clamp(20px,6vw,56px); z-index:10; font-family:var(--mono);
     font-size:.75rem; letter-spacing:.08em; color:var(--muted-dark); mix-blend-mode:difference;}
 
+  .lang-toggle{position:fixed; top:clamp(14px,4vh,32px); left:clamp(20px,6vw,56px); z-index:10; display:flex; gap:2px;
+    background:rgba(19,16,25,.6); backdrop-filter:blur(6px); border:1px solid var(--line-dark); border-radius:20px; padding:3px;}
+  .lang-btn{font-family:var(--mono); font-size:.68rem; letter-spacing:.05em; padding:4px 11px; border-radius:16px; border:none;
+    background:transparent; color:#cfc8b8; cursor:pointer; transition:background .2s, color .2s;}
+  .lang-btn.active{background:var(--accent); color:#1d1811;}
+
   @media (max-width:780px){
     .problem-grid, .sol-grid{grid-template-columns:1fr;}
     .phone-wrap{margin-top:20px;}
@@ -177,25 +183,25 @@
     <section class="slide dark slide-1">
       <div class="hero-bg"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Cotonou.jpg" alt="Cotonou de nuit"><span class="credit">Photo : Samdusal · CC BY-SA 4.0</span></div>
       <div class="content">
-        <div class="eyebrow">EIP · Ideation 2 · Track Solution</div>
+        <div class="eyebrow" id="d-eyebrow1">EIP · Ideation 2 · Track Solution</div>
         <h1 class="headline">DOSSIER<span class="underline" style="display:block; margin-top:.15em;"></span></h1>
-        <p class="tagline">Le bon papier, trouvé avant que vous le cherchiez.</p>
-        <p class="sub">Assistant IA pour les démarches administratives, Cotonou, Bénin.</p>
+        <p class="tagline" id="d-tagline">Le bon papier, trouvé avant que vous le cherchiez.</p>
+        <p class="sub" id="d-sub1">Assistant IA pour les démarches administratives, Cotonou, Bénin.</p>
       </div>
-      <div class="meta-row"><span>Projet &amp; nom</span><span>01 / 04</span></div>
+      <div class="meta-row"><span id="d-meta-label">Projet &amp; nom</span><span>01 / 04</span></div>
     </section>
 
     <section class="slide light slide-2">
-      <div class="eyebrow" style="color:var(--accent-deep);">Le problème &amp; l'audience</div>
-      <h1 class="headline" style="font-size:clamp(2rem,4.6vw,3.6rem); margin-bottom:.5em;">Le bon papier, jamais au bon moment</h1>
+      <div class="eyebrow" id="d-eyebrow2" style="color:var(--accent-deep);">Le problème &amp; l'audience</div>
+      <h1 class="headline" id="d-h2" style="font-size:clamp(2rem,4.6vw,3.6rem); margin-bottom:.5em;">Le bon papier, jamais au bon moment</h1>
       <div class="problem-grid">
         <div>
           <div class="audience-card">
             <div class="label">Audience</div>
-            <p>Un citoyen béninois qui doit obtenir une pièce précise (casier judiciaire, attestation, acte de naissance, légalisation), sans savoir au départ laquelle de ses démarches est déjà en ligne.</p>
+            <p id="d-aud-p">Un citoyen béninois qui doit obtenir une pièce précise (casier judiciaire, attestation, acte de naissance, légalisation), sans savoir au départ laquelle de ses démarches est déjà en ligne.</p>
             <div class="existing-note">
-              <span class="existing-label">Ce qui existe déjà</span>
-              <p>Le casier judiciaire est <em>100 % en ligne depuis mars 2026</em> sur service-public.bj. Mais chaque démarche reste un service séparé, à trouver soi-même, avec son NPI en main.</p>
+              <span class="existing-label" id="d-exist-label">Ce qui existe déjà</span>
+              <p id="d-exist-p">Le casier judiciaire est <em>100 % en ligne depuis mars 2026</em> sur service-public.bj. Mais chaque démarche reste un service séparé, à trouver soi-même, avec son NPI en main.</p>
             </div>
           </div>
           <div class="audience-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/6/61/3%C3%A8me_Arrondissement_de_Cotonou_%28Si%C3%A8ge_d%27Agbodj%C3%A8do%29.jpg" alt="Siège administratif, Cotonou"><span class="credit">Photo : Saliousoft · CC BY-SA 4.0</span></div>
@@ -203,31 +209,31 @@
         <div class="pain-list">
           <div class="pain">
             <span class="num">01</span>
-            <div><h3>Mauvaise pièce</h3><p>On découvre l'erreur une fois dans la file, pas avant.</p></div>
+            <div id="d-pain1"><h3>Mauvaise pièce</h3><p>On découvre l'erreur une fois dans la file, pas avant.</p></div>
           </div>
           <div class="pain">
             <span class="num">02</span>
-            <div><h3>Procédure invisible</h3><p>Chaque administration a ses règles, écrites nulle part de façon claire.</p></div>
+            <div id="d-pain2"><h3>Procédure invisible</h3><p>Chaque administration a ses règles, écrites nulle part de façon claire.</p></div>
           </div>
           <div class="pain">
             <span class="num">03</span>
-            <div><h3>Journée perdue</h3><p>Il faut revenir demain, et parfois poser un jour de congé pour ça.</p></div>
+            <div id="d-pain3"><h3>Journée perdue</h3><p>Il faut revenir demain, et parfois poser un jour de congé pour ça.</p></div>
           </div>
         </div>
       </div>
     </section>
 
     <section class="slide dark slide-3">
-      <div class="eyebrow">La solution</div>
+      <div class="eyebrow" id="d-eyebrow3">La solution</div>
       <div class="sol-grid">
         <div>
-          <h1 class="headline" style="font-size:clamp(2rem,4.4vw,3.4rem);">Décrivez votre besoin, on sort le dossier</h1>
+          <h1 class="headline" id="d-h3" style="font-size:clamp(2rem,4.4vw,3.4rem);">Décrivez votre besoin, on sort le dossier</h1>
           <div class="steps">
-            <div class="step"><span class="dot">1</span><div><h4>Décrire</h4><p>En langage naturel : « je dois fournir un casier judiciaire pour un visa ».</p></div></div>
-            <div class="step"><span class="dot">2</span><div><h4>Liste exacte</h4><p>L'IA identifie les pièces requises, où les obtenir, et pré-remplit les formulaires.</p></div></div>
-            <div class="step"><span class="dot">3</span><div><h4>Suivi</h4><p>Statut du dossier jusqu'au retrait de la pièce finale.</p></div></div>
+            <div class="step"><span class="dot">1</span><div id="d-step1"><h4>Décrire</h4><p>En langage naturel : « je dois fournir un casier judiciaire pour un visa ».</p></div></div>
+            <div class="step"><span class="dot">2</span><div id="d-step2"><h4>Liste exacte</h4><p>L'IA identifie les pièces requises, où les obtenir, et pré-remplit les formulaires.</p></div></div>
+            <div class="step"><span class="dot">3</span><div id="d-step3"><h4>Suivi</h4><p>Statut du dossier jusqu'au retrait de la pièce finale.</p></div></div>
           </div>
-          <p class="callout"><strong>Sans IA :</strong> il faut déjà savoir quel service chercher sur service-public.bj, et avoir son NPI en main.<br><strong>Avec DOSSIER :</strong> vous décrivez votre besoin, l'IA route vers le bon service, ou vous dit s'il faut encore passer par un guichet.</p>
+          <p class="callout" id="d-callout"><strong>Sans IA :</strong> il faut déjà savoir quel service chercher sur service-public.bj, et avoir son NPI en main.<br><strong>Avec DOSSIER :</strong> vous décrivez votre besoin, l'IA route vers le bon service, ou vous dit s'il faut encore passer par un guichet.</p>
         </div>
         <div class="phone-wrap">
           <div class="phone">
@@ -248,10 +254,10 @@
                 <div class="msg bot" id="d-msg3">Bonne nouvelle : c'est en ligne sur service-public.bj.<br>Il vous faut :<br>1. Votre NPI<br>2. Une pièce d'identité valide<br>3. 1 900 FCFA à régler en ligne</div>
                 <button class="cta" id="d-cta">Oui, guidez-moi →</button>
                 <div class="checklist" id="d-checklist">
-                  <div class="check-item">✓ NPI vérifié</div>
-                  <div class="check-item">✓ Pièce d'identité valide</div>
-                  <div class="check-item">✓ 1 900 FCFA réglés en ligne</div>
-                  <div class="check-item ready">Demande envoyée sur service-public.bj</div>
+                  <div class="check-item" id="d-check1">✓ NPI vérifié</div>
+                  <div class="check-item" id="d-check2">✓ Pièce d'identité valide</div>
+                  <div class="check-item" id="d-check3">✓ 1 900 FCFA réglés en ligne</div>
+                  <div class="check-item ready" id="d-check4">Demande envoyée sur service-public.bj</div>
                 </div>
               </div>
               <button class="replay" id="d-replay">↻ Rejouer</button>
@@ -264,15 +270,19 @@
 
     <section class="slide light slide-4">
       <div class="eyebrow" style="color:var(--accent-deep); justify-content:center;">Conclusion</div>
-      <h1 class="headline">Devenir le guichet numérique de référence</h1>
-      <p class="sub">D'abord pour les démarches individuelles à Cotonou, puis pour toute administration numérique là où le papier domine encore.</p>
-      <p class="close-tag">DOSSIER : le bon papier, trouvé avant que vous le cherchiez.</p>
+      <h1 class="headline" id="d-h4">Devenir le guichet numérique de référence</h1>
+      <p class="sub" id="d-sub4">D'abord pour les démarches individuelles à Cotonou, puis pour toute administration numérique là où le papier domine encore.</p>
+      <p class="close-tag" id="d-close">DOSSIER : le bon papier, trouvé avant que vous le cherchiez.</p>
     </section>
 
   </div>
 </div>
 
 <div class="counter" id="counter">01 / 04</div>
+<div class="lang-toggle">
+  <button class="lang-btn active" id="lang-fr">FR</button>
+  <button class="lang-btn" id="lang-en">EN</button>
+</div>
 <div class="nav">
   <button class="nav-btn" id="prev" aria-label="Précédent">‹</button>
   <div class="dots" id="dots"></div>
@@ -305,6 +315,57 @@
     resetDossierDemo();
     setTimeout(playDossierDemo, 80);
   });
+
+  var i18n = {
+    'd-eyebrow1': { en: 'EIP · Ideation 2 · Solution Track' },
+    'd-tagline': { en: 'The right paper, found before you go looking for it.' },
+    'd-sub1': { en: 'AI assistant for administrative procedures, Cotonou, Benin.' },
+    'd-meta-label': { en: 'Project &amp; name' },
+    'd-eyebrow2': { en: 'The problem &amp; the audience' },
+    'd-h2': { en: 'The right paper, never at the right time' },
+    'd-aud-p': { en: 'A Beninese citizen who needs a specific document (criminal record certificate, attestation, birth certificate, document legalization), without knowing at first which of these procedures is already available online.' },
+    'd-exist-label': { en: 'What already exists' },
+    'd-exist-p': { en: 'The criminal record certificate has been <em>100% online since March 2026</em> on service-public.bj. But each procedure remains a separate service you have to find yourself, with your NPI in hand.' },
+    'd-pain1': { en: '<h3>Wrong document</h3><p>You find out about the mistake once you\'re in line, not before.</p>' },
+    'd-pain2': { en: '<h3>Invisible procedure</h3><p>Every administration has its own rules, written down clearly nowhere.</p>' },
+    'd-pain3': { en: '<h3>A lost day</h3><p>You have to come back tomorrow, and sometimes take a day off work for it.</p>' },
+    'd-eyebrow3': { en: 'The solution' },
+    'd-h3': { en: 'Describe what you need, we pull the file' },
+    'd-step1': { en: '<h4>Describe</h4><p>In natural language: "I need a criminal record certificate for a visa."</p>' },
+    'd-step2': { en: '<h4>Exact list</h4><p>The AI identifies the required documents, where to get them, and pre-fills the forms.</p>' },
+    'd-step3': { en: '<h4>Tracking</h4><p>File status, all the way to collecting the final document.</p>' },
+    'd-callout': { en: '<strong>Without AI:</strong> you already need to know which service to look for on service-public.bj, and have your NPI in hand.<br><strong>With DOSSIER:</strong> you describe what you need, the AI routes you to the right service, or tells you if you still need to go to a counter.' },
+    'd-msg1': { en: 'Hello! Tell me what you need to do.' },
+    'd-msg2': { en: 'I need a criminal record certificate for a visa.' },
+    'd-msg3': { en: 'Good news: it\'s online on service-public.bj.<br>You\'ll need:<br>1. Your NPI<br>2. A valid ID<br>3. 1,900 FCFA to pay online' },
+    'd-cta': { en: 'Yes, guide me →' },
+    'd-check1': { en: '✓ NPI verified' },
+    'd-check2': { en: '✓ Valid ID' },
+    'd-check3': { en: '✓ 1,900 FCFA paid online' },
+    'd-check4': { en: 'Application sent on service-public.bj' },
+    'd-replay': { en: '↻ Replay' },
+    'd-h4': { en: 'Becoming the digital reference for administrative procedures' },
+    'd-sub4': { en: 'First for individual procedures in Cotonou, then for digital administration wherever paper still dominates.' },
+    'd-close': { en: 'DOSSIER: the right paper, found before you go looking for it.' }
+  };
+  Object.keys(i18n).forEach(function(id){ i18n[id].fr = document.getElementById(id).innerHTML; });
+
+  function setLang(lang){
+    Object.keys(i18n).forEach(function(id){ document.getElementById(id).innerHTML = i18n[id][lang]; });
+    document.documentElement.lang = lang;
+    document.getElementById('lang-fr').classList.toggle('active', lang === 'fr');
+    document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+    document.getElementById('prev').setAttribute('aria-label', lang === 'fr' ? 'Précédent' : 'Previous');
+    document.getElementById('next').setAttribute('aria-label', lang === 'fr' ? 'Suivant' : 'Next');
+    try{ localStorage.setItem('dossier-lang', lang); }catch(e){}
+  }
+  document.getElementById('lang-fr').addEventListener('click', function(){ setLang('fr'); });
+  document.getElementById('lang-en').addEventListener('click', function(){ setLang('en'); });
+  (function(){
+    var saved = null;
+    try{ saved = localStorage.getItem('dossier-lang'); }catch(e){}
+    if(saved === 'en') setLang('en');
+  })();
 
   var track = document.getElementById('track');
   var slides = document.querySelectorAll('.slide');
