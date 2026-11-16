@@ -29,9 +29,9 @@
   ::selection{background:var(--accent); color:#0b1612;}
 
   .deck{position:relative; width:100vw; height:100svh; overflow:hidden;}
-  .track{display:flex; height:100%; width:400%; transition:transform .65s cubic-bezier(.65,0,.35,1);}
+  .track{display:flex; height:100%; width:500%; transition:transform .65s cubic-bezier(.65,0,.35,1);}
   .slide{
-    width:25%; height:100%; flex:0 0 25%;
+    width:20%; height:100%; flex:0 0 20%;
     display:flex; flex-direction:column; justify-content:center;
     padding: clamp(28px,6vw,96px) clamp(20px,7vw,120px);
     position:relative; overflow:hidden; background:var(--bg);
@@ -79,6 +79,15 @@
   .pain h3{font-family:var(--display); font-weight:600; font-size:clamp(1.05rem,1.8vw,1.3rem); margin-bottom:4px;}
   .pain p{font-size:.95rem; color:var(--muted); line-height:1.5;}
 
+  .biz-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2.6vw,26px); margin-top:clamp(22px,4vh,40px);}
+  .biz-card{background:var(--card); border:1px solid var(--line); border-radius:4px; padding:clamp(18px,2.6vw,26px);}
+  .biz-card .label{font-family:var(--mono); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:10px;}
+  .biz-card ul{list-style:none; display:flex; flex-direction:column; gap:9px;}
+  .biz-card li{font-size:.86rem; line-height:1.5; color:var(--muted);}
+  .biz-card li strong{color:var(--fg); font-weight:600;}
+  .biz-note{margin-top:26px; border-left:3px solid var(--accent); padding-left:16px; font-size:.9rem; color:var(--muted); max-width:72ch; line-height:1.55;}
+  .biz-note strong{color:var(--fg);}
+
   .sol-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(32px,5vw,72px); align-items:center;}
   .steps{display:flex; flex-direction:column; gap:22px; margin-top:28px;}
   .step{display:flex; gap:16px; align-items:flex-start;}
@@ -118,9 +127,9 @@
   .replay:hover{background:rgba(238,245,238,.08);}
   .home-indicator{flex:none; width:34%; height:4px; border-radius:3px; background:rgba(238,245,238,.28); margin:6px auto 0;}
 
-  .slide-4{align-items:center; text-align:center;}
-  .slide-4 .headline{font-size:clamp(2.1rem,5.4vw,4.3rem); max-width:17ch; margin:0 auto .3em;}
-  .slide-4 .sub{max-width:54ch; margin:0 auto 1.4em;}
+  .slide-5{align-items:center; text-align:center;}
+  .slide-5 .headline{font-size:clamp(2.1rem,5.4vw,4.3rem); max-width:17ch; margin:0 auto .3em;}
+  .slide-5 .sub{max-width:54ch; margin:0 auto 1.4em;}
   .ask{background:var(--card); border:1px solid var(--line); border-radius:4px; padding:18px 26px;
     display:inline-block; font-size:.92rem; max-width:58ch; margin:0 auto 1.6em; text-align:left; line-height:1.5;}
   .ask .label{font-family:var(--mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:6px;}
@@ -146,7 +155,7 @@
   .lang-btn.active{background:var(--accent); color:#0b1612;}
 
   @media (max-width:780px){
-    .problem-grid, .sol-grid{grid-template-columns:1fr;}
+    .problem-grid, .sol-grid, .biz-grid{grid-template-columns:1fr;}
     .phone-wrap{margin-top:20px;}
     .phone{width:190px;}
     .deck{overflow-y:auto;}
@@ -168,7 +177,7 @@
         <p class="tagline" id="b-tagline">Votre comptable, caché dans vos SMS Mobile Money.</p>
         <p class="sub" id="b-sub1">Comptabilité automatique à partir des SMS MTN MoMo, Moov Money &amp; Celtiis, Cotonou, Bénin.</p>
       </div>
-      <div class="meta-row"><span id="b-meta-label">Projet &amp; nom</span><span>01 / 04</span></div>
+      <div class="meta-row"><span id="b-meta-label">Projet &amp; nom</span><span>01 / 05</span></div>
     </section>
 
     <section class="slide alt slide-2">
@@ -247,6 +256,38 @@
     </section>
 
     <section class="slide alt slide-4">
+      <div class="eyebrow" id="b-eyebrow4">Modèle économique</div>
+      <h1 class="headline" id="b-h4biz" style="font-size:clamp(2rem,4.4vw,3.4rem);">Le commerçant paie ce qu'il perdait déjà en temps</h1>
+      <p class="tagline" id="b-biz-tagline" style="font-size:clamp(1.1rem,2.2vw,1.55rem); margin-bottom:0;">Un modèle déjà validé ailleurs dans la région.</p>
+      <div class="biz-grid">
+        <div class="biz-card">
+          <span class="label" id="b-biz-label1">Revenus</span>
+          <ul>
+            <li id="b-biz-r1"><strong>Freemium SaaS</strong> : le bilan de caisse de base lu depuis les SMS reste gratuit, l'export comptable et les rapports multi-boutiques sont en abonnement mensuel.</li>
+            <li id="b-biz-r2"><strong>B2B2C</strong> : partenariat avec des institutions de microfinance, le bilan vérifié servant de justificatif pour un scoring de crédit.</li>
+          </ul>
+        </div>
+        <div class="biz-card">
+          <span class="label" id="b-biz-label2">Coûts</span>
+          <ul>
+            <li id="b-biz-c1">Traitement des SMS, en local sur le téléphone de préférence, pour limiter les coûts serveur et préserver la vie privée.</li>
+            <li id="b-biz-c2">Maintenance des formats de lecture à chaque mise à jour des opérateurs.</li>
+            <li id="b-biz-c3">Support client.</li>
+          </ul>
+        </div>
+        <div class="biz-card">
+          <span class="label" id="b-biz-label3">Viabilité</span>
+          <ul>
+            <li id="b-biz-v1">Le prix mensuel reste inférieur au temps perdu aujourd'hui à faire les comptes à la main.</li>
+            <li id="b-biz-v2">Le partenariat microfinance est un revenu complémentaire, pas le pilier unique.</li>
+            <li id="b-biz-v3">Modèle déjà validé ailleurs : Proboutik (Sénégal) facture un abonnement comparable.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="biz-note" id="b-biz-note"><strong>Pourquoi ça tient :</strong> contrairement à une démarche administrative, la tenue de caisse a déjà un coût perçu (temps, erreurs), ce qui rend le commerçant prêt à payer pour le faire disparaître.</p>
+    </section>
+
+    <section class="slide slide-5">
       <div class="eyebrow" style="justify-content:center;">Conclusion</div>
       <h1 class="headline" id="b-h4">La comptabilité invisible du commerce informel</h1>
       <p class="sub" id="b-sub4">D'abord à Cotonou, puis comme porte d'entrée vers le crédit pour ceux qui n'ont pas de garanties classiques.</p>
@@ -256,7 +297,7 @@
   </div>
 </div>
 
-<div class="counter" id="counter">01 / 04</div>
+<div class="counter" id="counter">01 / 05</div>
 <div class="lang-toggle">
   <button class="lang-btn active" id="lang-fr">FR</button>
   <button class="lang-btn" id="lang-en">EN</button>
@@ -338,6 +379,21 @@
     'b-label3': { en: 'Fees' },
     'b-label4': { en: 'Profit (week)' },
     'b-replay': { en: '↻ Replay' },
+    'b-eyebrow4': { en: 'Business model' },
+    'b-h4biz': { en: 'Shopkeepers pay for what they already lost in time' },
+    'b-biz-tagline': { en: 'A model already validated elsewhere in the region.' },
+    'b-biz-label1': { en: 'Revenue' },
+    'b-biz-r1': { en: '<strong>Freemium SaaS</strong>: the basic cash statement read from texts stays free, accounting exports and multi-shop reports are a monthly subscription.' },
+    'b-biz-r2': { en: '<strong>B2B2C</strong>: a partnership with microfinance institutions, where the verified statement serves as proof for credit scoring.' },
+    'b-biz-label2': { en: 'Costs' },
+    'b-biz-c1': { en: 'Text processing, ideally local on the phone, to limit server costs and protect privacy.' },
+    'b-biz-c2': { en: 'Maintaining the reading formats with every operator update.' },
+    'b-biz-c3': { en: 'Customer support.' },
+    'b-biz-label3': { en: 'Viability' },
+    'b-biz-v1': { en: 'The monthly price stays below the time currently lost doing the books by hand.' },
+    'b-biz-v2': { en: 'The microfinance partnership is a secondary revenue stream, not the main pillar.' },
+    'b-biz-v3': { en: 'A model already validated elsewhere: Proboutik (Senegal) charges a comparable subscription.' },
+    'b-biz-note': { en: '<strong>Why it holds:</strong> unlike an administrative procedure, bookkeeping already has a perceived cost (time, mistakes), which makes a shopkeeper ready to pay to make it disappear.' },
     'b-h4': { en: 'The invisible bookkeeping of informal commerce' },
     'b-sub4': { en: 'First in Cotonou, then as a gateway to credit for those without traditional collateral.' },
     'b-close': { en: 'BILAN SMS: your accountant, hidden inside your texts.' }

@@ -31,9 +31,9 @@
   ::selection{background:var(--accent); color:#1d1811;}
 
   .deck{position:relative; width:100vw; height:100svh; overflow:hidden;}
-  .track{display:flex; height:100%; width:400%; transition:transform .65s cubic-bezier(.65,0,.35,1);}
+  .track{display:flex; height:100%; width:500%; transition:transform .65s cubic-bezier(.65,0,.35,1);}
   .slide{
-    width:25%; height:100%; flex:0 0 25%;
+    width:20%; height:100%; flex:0 0 20%;
     display:flex; flex-direction:column; justify-content:center;
     padding: clamp(28px,6vw,96px) clamp(20px,7vw,120px);
     position:relative; overflow:hidden;
@@ -84,6 +84,16 @@
   .pain .num{font-family:var(--mono); font-size:.95rem; color:var(--accent-deep); padding-top:2px;}
   .pain h3{font-family:var(--serif); font-size:clamp(1.05rem,1.8vw,1.3rem); margin-bottom:4px;}
   .pain p{font-size:.95rem; color:var(--muted-light); line-height:1.5;}
+
+  /* SLIDE 4 : MODELE ECONOMIQUE */
+  .biz-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2.6vw,26px); margin-top:clamp(22px,4vh,40px);}
+  .biz-card{background:var(--card-light); border:1px solid var(--line-light); border-radius:4px; padding:clamp(18px,2.6vw,26px);}
+  .biz-card .label{font-family:var(--mono); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-deep); display:block; margin-bottom:10px;}
+  .biz-card ul{list-style:none; display:flex; flex-direction:column; gap:9px;}
+  .biz-card li{font-size:.86rem; line-height:1.5; color:var(--muted-light);}
+  .biz-card li strong{color:var(--fg-light); font-weight:600;}
+  .biz-note{margin-top:26px; border-left:3px solid var(--accent); padding-left:16px; font-size:.9rem; color:var(--muted-dark); max-width:72ch; line-height:1.55;}
+  .biz-note strong{color:var(--fg-dark);}
 
   /* SLIDE 3 : SOLUTION */
   .sol-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(32px,5vw,72px); align-items:center;}
@@ -137,10 +147,10 @@
   .replay:hover{background:rgba(29,24,17,.08);}
   .home-indicator{flex:none; width:34%; height:4px; border-radius:3px; background:rgba(29,24,17,.3); margin:6px auto 0;}
 
-  /* SLIDE 4 : CONCLUSION */
-  .slide-4{align-items:center; text-align:center;}
-  .slide-4 .headline{font-size:clamp(2.1rem,5.4vw,4.4rem); max-width:16ch; margin:0 auto .3em;}
-  .slide-4 .sub{max-width:52ch; margin:0 auto 1.4em; color:var(--muted-light);}
+  /* SLIDE 5 : CONCLUSION */
+  .slide-5{align-items:center; text-align:center;}
+  .slide-5 .headline{font-size:clamp(2.1rem,5.4vw,4.4rem); max-width:16ch; margin:0 auto .3em;}
+  .slide-5 .sub{max-width:52ch; margin:0 auto 1.4em; color:var(--muted-light);}
   .ask{background:var(--card-light); border:1px solid var(--line-light); border-radius:4px; padding:18px 26px;
     display:inline-block; font-size:.92rem; max-width:58ch; margin:0 auto 1.6em; text-align:left; line-height:1.5;}
   .ask .label{font-family:var(--mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-deep); display:block; margin-bottom:6px;}
@@ -167,7 +177,7 @@
   .lang-btn.active{background:var(--accent); color:#1d1811;}
 
   @media (max-width:780px){
-    .problem-grid, .sol-grid{grid-template-columns:1fr;}
+    .problem-grid, .sol-grid, .biz-grid{grid-template-columns:1fr;}
     .phone-wrap{margin-top:20px;}
     .phone{width:190px;}
     .deck{overflow-y:auto;}
@@ -189,7 +199,7 @@
         <p class="tagline" id="d-tagline">Le bon papier, trouvé avant que vous le cherchiez.</p>
         <p class="sub" id="d-sub1">Assistant IA pour les démarches administratives, Cotonou, Bénin.</p>
       </div>
-      <div class="meta-row"><span id="d-meta-label">Projet &amp; nom</span><span>01 / 04</span></div>
+      <div class="meta-row"><span id="d-meta-label">Projet &amp; nom</span><span>01 / 05</span></div>
     </section>
 
     <section class="slide light slide-2">
@@ -272,7 +282,40 @@
       </div>
     </section>
 
-    <section class="slide light slide-4">
+    <section class="slide dark slide-4">
+      <div class="eyebrow" id="d-eyebrow4">Modèle économique</div>
+      <h1 class="headline" id="d-h4biz" style="font-size:clamp(2rem,4.4vw,3.4rem);">Gratuit à l'usage, financé en amont</h1>
+      <p class="tagline" id="d-biz-tagline" style="font-size:clamp(.95rem,1.6vw,1.15rem); margin-bottom:0;">Le citoyen ne doit jamais payer pour une orientation qu'il juge être un service public.</p>
+      <div class="biz-grid">
+        <div class="biz-card">
+          <span class="label" id="d-biz-label1">Revenus</span>
+          <ul>
+            <li id="d-biz-r1"><strong>B2B</strong> : abonnement pour les entreprises et agences qui gèrent des démarches pour leurs employés ou clients.</li>
+            <li id="d-biz-r2"><strong>B2B2G</strong> : partenariat avec les mairies et service-public.bj, financé par convention plutôt que par l'usager.</li>
+            <li id="d-biz-r3"><strong>Freemium B2C</strong> : rappels et suivi multi-démarches en option payante, l'orientation de base reste gratuite.</li>
+          </ul>
+        </div>
+        <div class="biz-card">
+          <span class="label" id="d-biz-label2">Coûts</span>
+          <ul>
+            <li id="d-biz-c1">Appels au modèle d'IA pour chaque démarche décrite.</li>
+            <li id="d-biz-c2">Veille et mise à jour des procédures à chaque changement administratif.</li>
+            <li id="d-biz-c3">Hébergement et support aux utilisateurs.</li>
+          </ul>
+        </div>
+        <div class="biz-card">
+          <span class="label" id="d-biz-label3">Viabilité</span>
+          <ul>
+            <li id="d-biz-v1">Le B2B et le B2B2G couvrent les coûts d'IA et de veille.</li>
+            <li id="d-biz-v2">Le B2C gratuit reste le moteur d'adoption et de légitimité.</li>
+            <li id="d-biz-v3">Le volume d'usage gratuit justifie le prix payé par les partenaires.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="biz-note" id="d-biz-note"><strong>Pourquoi ça tient :</strong> les entreprises et les mairies ont déjà un budget pour ce travail, contrairement au citoyen isolé. Le gratuit grand public devient l'argument de vente auprès des partenaires.</p>
+    </section>
+
+    <section class="slide light slide-5">
       <div class="eyebrow" style="color:var(--accent-deep); justify-content:center;">Conclusion</div>
       <h1 class="headline" id="d-h4">Devenir le guichet numérique de référence</h1>
       <p class="sub" id="d-sub4">D'abord pour les démarches individuelles à Cotonou, puis pour toute administration numérique là où le papier domine encore.</p>
@@ -282,7 +325,7 @@
   </div>
 </div>
 
-<div class="counter" id="counter">01 / 04</div>
+<div class="counter" id="counter">01 / 05</div>
 <div class="lang-toggle">
   <button class="lang-btn active" id="lang-fr">FR</button>
   <button class="lang-btn" id="lang-en">EN</button>
@@ -357,6 +400,22 @@
     'd-check3': { en: '✓ 1,900 FCFA paid online' },
     'd-check4': { en: 'Application sent on service-public.bj' },
     'd-replay': { en: '↻ Replay' },
+    'd-eyebrow4': { en: 'Business model' },
+    'd-h4biz': { en: 'Free to use, funded upstream' },
+    'd-biz-tagline': { en: 'A citizen should never have to pay for guidance they see as a public service.' },
+    'd-biz-label1': { en: 'Revenue' },
+    'd-biz-r1': { en: '<strong>B2B</strong>: a subscription for companies and agencies that handle procedures for their employees or clients.' },
+    'd-biz-r2': { en: '<strong>B2B2G</strong>: a partnership with town halls and service-public.bj, funded through an agreement rather than by the user.' },
+    'd-biz-r3': { en: '<strong>Freemium B2C</strong>: reminders and multi-procedure tracking as a paid option, while basic guidance stays free.' },
+    'd-biz-label2': { en: 'Costs' },
+    'd-biz-c1': { en: 'AI model calls for every procedure described.' },
+    'd-biz-c2': { en: 'Monitoring and updating procedures with every administrative change.' },
+    'd-biz-c3': { en: 'Hosting and user support.' },
+    'd-biz-label3': { en: 'Viability' },
+    'd-biz-v1': { en: 'B2B and B2B2G revenue covers the AI and monitoring costs.' },
+    'd-biz-v2': { en: 'The free B2C tier remains the engine of adoption and legitimacy.' },
+    'd-biz-v3': { en: 'The volume of free usage justifies the price partners pay.' },
+    'd-biz-note': { en: '<strong>Why it holds:</strong> companies and town halls already have a budget for this work, unlike an individual citizen. Free access for the public becomes the selling point with partners.' },
     'd-h4': { en: 'Becoming the digital reference for administrative procedures' },
     'd-sub4': { en: 'First for individual procedures in Cotonou, then for digital administration wherever paper still dominates.' },
     'd-close': { en: 'DOSSIER: the right paper, found before you go looking for it.' }
