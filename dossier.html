@@ -106,7 +106,8 @@
   .statusbar{display:flex; justify-content:space-between; align-items:center; padding:0 4px 6px; color:#1d1811; flex:none;}
   .statusbar .time{font-family:var(--mono); font-size:.62rem; font-weight:600;}
   .statusbar .icons{display:flex; gap:5px; align-items:center;}
-  .chat{flex:1; display:flex; flex-direction:column; gap:7px; overflow:hidden; min-height:0;}
+  .chat{flex:1; display:flex; flex-direction:column; gap:7px; overflow-y:auto; overflow-x:hidden; min-height:0; scrollbar-width:none;}
+  .chat::-webkit-scrollbar{display:none;}
   .bubble,.msg{font-family:var(--sans); font-size:.68rem; line-height:1.4; padding:8px 11px; border-radius:12px; max-width:86%;
     opacity:0; transform:translateY(8px); transition:opacity .4s ease, transform .4s ease;}
   .bubble.show,.msg.show{opacity:1; transform:none;}
@@ -228,7 +229,7 @@
       <div class="sol-grid">
         <div>
           <h1 class="headline" id="d-h3" style="font-size:clamp(2rem,4.4vw,3.4rem);">Décrivez votre besoin, on sort le dossier</h1>
-          <p class="tagline" id="d-not-chatbot" style="font-size:clamp(.95rem,1.6vw,1.15rem); margin-bottom:0;">Pas un chatbot administratif : un moteur qui classe la demande parmi des dizaines de démarches et sait lesquelles sont déjà en ligne.</p>
+          <p class="tagline" id="d-not-chatbot" style="font-size:clamp(.95rem,1.6vw,1.15rem); margin-bottom:0;">Pas un chatbot à réponses toutes faites : les citoyens ne nomment jamais la démarche avec les termes officiels, l'IA classe une demande formulée librement, elle ne cherche pas un mot-clé.</p>
           <div class="steps">
             <div class="step"><span class="dot">1</span><div id="d-step1"><h4>Décrire</h4><p>En langage naturel : « je dois fournir un casier judiciaire pour un visa ».</p></div></div>
             <div class="step"><span class="dot">2</span><div id="d-step2"><h4>Routage fiable</h4><p>L'IA classe la demande parmi des dizaines de démarches, repère si elle est déjà en ligne ou seulement au guichet, et garde cette carte à jour à mesure que l'administration numérise service par service.</p></div></div>
@@ -251,6 +252,8 @@
                 <div class="typing" id="d-typing1"><span></span><span></span><span></span></div>
                 <div class="msg bot" id="d-msg1">Bonjour ! Dites-moi ce que vous devez faire.</div>
                 <div class="msg user" id="d-msg2">Je dois fournir un casier judiciaire pour un visa.</div>
+                <div class="msg bot" id="d-msg2b">Pour bien vous orienter : c'est un casier béninois, ou un extrait d'un autre pays ?</div>
+                <div class="msg user" id="d-msg2c">Béninois.</div>
                 <div class="typing" id="d-typing2"><span></span><span></span><span></span></div>
                 <div class="msg bot" id="d-msg3">Bonne nouvelle : c'est en ligne sur service-public.bj.<br>Il vous faut :<br>1. Votre NPI<br>2. Une pièce d'identité valide<br>3. 1 900 FCFA à régler en ligne</div>
                 <button class="cta" id="d-cta">Oui, guidez-moi →</button>
@@ -295,18 +298,24 @@
   var dossierTimeouts = [];
   function resetDossierDemo(){
     dossierTimeouts.forEach(clearTimeout); dossierTimeouts = [];
-    ['d-typing1','d-typing2','d-msg1','d-msg2','d-msg3','d-cta','d-checklist'].forEach(function(id){
+    ['d-typing1','d-typing2','d-msg1','d-msg2','d-msg2b','d-msg2c','d-msg3','d-cta','d-checklist'].forEach(function(id){
       document.getElementById(id).classList.remove('show');
     });
   }
+  function scrollDossierChat(){
+    var el = document.getElementById('dossierChat');
+    el.scrollTop = el.scrollHeight;
+  }
   function playDossierDemo(){
-    function at(ms, fn){ dossierTimeouts.push(setTimeout(fn, ms)); }
+    function at(ms, fn){ dossierTimeouts.push(setTimeout(function(){ fn(); scrollDossierChat(); }, ms)); }
     at(300, function(){ document.getElementById('d-typing1').classList.add('show'); });
     at(1100, function(){ document.getElementById('d-typing1').classList.remove('show'); document.getElementById('d-msg1').classList.add('show'); });
     at(1900, function(){ document.getElementById('d-msg2').classList.add('show'); });
-    at(2700, function(){ document.getElementById('d-typing2').classList.add('show'); });
-    at(3700, function(){ document.getElementById('d-typing2').classList.remove('show'); document.getElementById('d-msg3').classList.add('show'); });
-    at(4400, function(){ document.getElementById('d-cta').classList.add('show'); });
+    at(2500, function(){ document.getElementById('d-msg2b').classList.add('show'); });
+    at(3100, function(){ document.getElementById('d-msg2c').classList.add('show'); });
+    at(3700, function(){ document.getElementById('d-typing2').classList.add('show'); });
+    at(4700, function(){ document.getElementById('d-typing2').classList.remove('show'); document.getElementById('d-msg3').classList.add('show'); });
+    at(5400, function(){ document.getElementById('d-cta').classList.add('show'); });
   }
   document.getElementById('d-cta').addEventListener('click', function(){
     this.classList.remove('show');
@@ -332,13 +341,15 @@
     'd-pain3': { en: '<h3>A lost day</h3><p>You have to come back tomorrow, and sometimes take a day off work for it.</p>' },
     'd-eyebrow3': { en: 'The solution' },
     'd-h3': { en: 'Describe what you need, we pull the file' },
-    'd-not-chatbot': { en: 'Not an administrative chatbot: an engine that classifies the request among dozens of procedures and knows which ones are already online.' },
+    'd-not-chatbot': { en: 'Not a scripted chatbot: citizens never name the procedure using official terms, the AI classifies a freely worded request, it does not search for a keyword.' },
     'd-step1': { en: '<h4>Describe</h4><p>In natural language: "I need a criminal record certificate for a visa."</p>' },
     'd-step2': { en: '<h4>Reliable routing</h4><p>The AI classifies the request among dozens of procedures, checks whether it\'s already online or still counter-only, and keeps that map up to date as the administration digitizes service by service.</p>' },
     'd-step3': { en: '<h4>Tracking</h4><p>File status, all the way to collecting the final document.</p>' },
     'd-callout': { en: '<strong>Without AI:</strong> you already need to know which service to look for on service-public.bj, and have your NPI in hand.<br><strong>With DOSSIER:</strong> you describe what you need, the AI routes you to the right service, or tells you if you still need to go to a counter.' },
     'd-msg1': { en: 'Hello! Tell me what you need to do.' },
     'd-msg2': { en: 'I need a criminal record certificate for a visa.' },
+    'd-msg2b': { en: 'To point you in the right direction: is this a Beninese record, or one from another country?' },
+    'd-msg2c': { en: 'Beninese.' },
     'd-msg3': { en: 'Good news: it\'s online on service-public.bj.<br>You\'ll need:<br>1. Your NPI<br>2. A valid ID<br>3. 1,900 FCFA to pay online' },
     'd-cta': { en: 'Yes, guide me →' },
     'd-check1': { en: '✓ NPI verified' },
